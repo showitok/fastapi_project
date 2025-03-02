@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: ./..
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - APP_ENV=local
+    healthcheck:
+      test: "curl -f http://localhost:8080/heartbeat/readiness || exit 1"
+      interval: 20s
+      retries: 15
+      timeout: 3s
+    volumes:
+      - ./..:/usr/src/app
+    networks:
+      - ns
+
+networks:
+  ns:
+    driver: bridge
