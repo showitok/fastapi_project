@@ -1,0 +1,5 @@
+app:
+  title: "A post management API"
+  description: "This is used for managing posts."
+  version: "0.0.1"
+  debug: true
