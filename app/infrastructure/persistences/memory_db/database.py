@@ -2,7 +2,7 @@ import random
 from datetime import datetime
 from dataclasses import dataclass, field
 
-__all__ = ("database", )
+__all__ = ("database", "Database")
 
 
 @dataclass
@@ -17,6 +17,7 @@ class Database:
                 "user_id": user_id,
                 "email": f"user_{user_id}@example.com",
                 "created": datetime.utcnow(),
+                "updated": datetime.utcnow(),
             }
             for user_id in range(1, 4)
         }
@@ -27,6 +28,7 @@ class Database:
                 "post_id": post_id,
                 "title": f"FastAPI tutorial {post_id}",
                 "created": datetime.utcnow(),
+                "updated": datetime.utcnow(),
                 "user_id": random.choice(list(self.users.keys()))
             }
             for post_id in range(1, 6)
