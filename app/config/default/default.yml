@@ -3,3 +3,11 @@ app:
   description: "This is used for managing posts."
   version: "0.0.1"
   debug: true
+
+databases:
+  mysql:
+    host: mysql
+    port: 3306
+    user: test
+    password: test
+    dbname: fastapi

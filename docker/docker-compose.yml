@@ -16,6 +16,23 @@ services:
       timeout: 3s
     volumes:
       - ./..:/usr/src/app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - ns
+
+  mysql:
+    build:
+      context: ./..
+      dockerfile: ./docker/mysql/Dockerfile
+    volumes:
+      - ./../docker/mysql/fixture:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: "mysql -u$${MYSQL_USER} -p$${MYSQL_PASSWORD} $${MYSQL_DATABASE} -e 'SELECT 1'"
+      interval: 1s
+      retries: 15
+      timeout: 15s
     networks:
       - ns
 

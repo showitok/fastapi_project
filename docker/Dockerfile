@@ -19,4 +19,4 @@ COPY --chown=app:app . .
 
 USER app
 
-CMD ["python", "-m", "app"]
+CMD ["python", "-m", "app.entrypoint.fastapi"]

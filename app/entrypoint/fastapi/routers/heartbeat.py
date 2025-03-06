@@ -1,5 +1,6 @@
 from fastapi import APIRouter, status
 from fastapi.responses import JSONResponse
+from app.application import application_health_check
 
 router = APIRouter(
     prefix="/heartbeat",
@@ -8,10 +9,12 @@ router = APIRouter(
 
 
 @router.get("/readiness", status_code=status.HTTP_200_OK)
-def readiness() -> JSONResponse:
+async def readiness() -> JSONResponse:
+    await application_health_check()
     return JSONResponse({"status": "readiness"})
 
 
 @router.get("/liveness", status_code=status.HTTP_200_OK)
-def liveness() -> JSONResponse:
+async def liveness() -> JSONResponse:
+    await application_health_check()
     return JSONResponse({"status": "liveness"})
